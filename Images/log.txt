@@ -1,0 +1,33 @@
+3/18 I got the shape working with the spacer but it pushes the labels for the days out of wack. I need to make seperate variables for them
+
+3/21 I made the button maker into a function. I am currently working on makeing the checker into a function however I am running into a problem with the scope
+
+3/21 I got the spacingchecker working now i need to get the spacer to work for each month 
+
+3/22 I cleaned up the single file of code into a object so I can use OOP. I made a main that will be able to use the Calender Class and others in the future
+
+3/23 I made a class object for the main menu, i used a drop down menu that was super messy, if i did it again I would use the menu to return a number and close the window.
+    maybe use https://www.pythontutorial.net/tkinter/tkinter-radio-button/
+    I should add buttons to the side of the month name that go to the next or previous month
+
+3/24 -25 I started to work on an class for the information of a day and spent a while debugging it and working with indexes
+3/26 I started remaking the window for the day info. I realized I cant have multiple windows open or things wont work
+
+Version 1.0 out 3/28
+##What to add 
+    Back buttons all around 
+    Icons that change when something is added
+    Error if user inputs letter or floats( maybe i should figure out why it messes up)
+    **Use dropdown menu to switch between months  https://www.pythontutorial.net/tkinter/tkinter-menu/
+    https://www.pythontutorial.net/tkinter/tkinter-notebook/ ??? maybe
+    add more labels for better UI especially on later window
+    fix int to string stuff - possible caused by adding multiple labels stacking - need to .destroy() label need to make the labels part of self 
+                                                                                                    instead of function so all function can destriy
+                                                                                                    #fixed it by destroying objects- thats pretty good
+    fix if add button is pressed when there is nothing in it
+    rework those pesky if statements in Calendar 
+    add leap years
+    #check number of days in month before the function is ran 
+    #go thorugh comments and add description/delete bad
+
+    to be able to change the exercises there should be a master template held in a file that can be read by todayinfo class that knows how to handle it
