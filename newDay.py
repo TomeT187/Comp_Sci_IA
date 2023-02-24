@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from todayInfo import todayInfo
-from dayInfo import dayArray
+from dayArray import dayArray
 from tkinter import StringVar
 
 class Day(tk.Tk):
@@ -15,7 +15,7 @@ class Day(tk.Tk):
         self.columnconfigure(1, weight=1)
         self.columnconfigure(2, weight=4)
         self.columnconfigure(3, weight=3)
-        todayArray = dayArray(12,12)
+        todayArray = dayArray(NumberDayIn,monthNumberIn)
         for i in range(len(todayArray.dataClassList)):
             self.objectPlacer(todayArray,i)
             
@@ -63,6 +63,6 @@ class Day(tk.Tk):
         self.columnconfigure(0, weight=0)
         self.iconbitmap('Images\\table.ico')
 
-test = Day(12,12)
-test.mainloop()
+# test = Day(12,12)
+# test.mainloop()
 
