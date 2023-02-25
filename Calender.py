@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import datetime
 from math import floor
-from newDay import Day
+
 
 
 
@@ -20,6 +20,23 @@ class Calender(tk.Tk,):
         
         self.screenmaker(self,985,500)
         self.CalenderMaker()
+        menuBar = tk.Menu(self)
+        self.config(menu=menuBar)
+
+        file_menu = tk.Menu(menuBar)
+
+        # add a menu item to the menu
+        file_menu.add_command(label='Month Select',command=self.mainMenuOpen)
+
+        # add the File menu to the menubar
+        menuBar.add_cascade(label="Months",menu=file_menu)
+
+    def mainMenuOpen(self):
+        self.destroy()
+        from mainMenu import mainMenu
+        MainMenu = mainMenu()
+        MainMenu.mainloop()
+
 
     
     def screenmaker(self,root,window_width, window_height):
@@ -41,6 +58,7 @@ class Calender(tk.Tk,):
 
 
     def DayObjectMaker(self,dayNumber):
+        from Day import Day
         self.destroy()
         thisDay = Day(dayNumber,self.nameofthemonth) 
         thisDay.mainloop()
