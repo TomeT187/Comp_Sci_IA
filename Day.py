@@ -69,6 +69,9 @@ class Day(tk.Tk):
         headerEntryLabel = ttk.Label(self,text="Set Amount")
         headerEntryLabel.grid(column=3,row=1,padx=5, pady=5,sticky=tk.E)
 
+        removeLabel = ttk.Label(self,text="Remove Data")
+        removeLabel.grid(column=4,row=1,padx=5, pady=5,sticky=tk.E)
+
         
 
         for self.i in range(len(self.todayArray.dataClassList)):
