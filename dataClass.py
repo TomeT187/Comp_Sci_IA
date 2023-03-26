@@ -1,3 +1,10 @@
+#
+#Read Readme first if cannot run the code
+#
+#
+#Order to read files
+#main.py -> mainMeny.py -> Calender.py -> Day.py -> dayArray.py -> dataClass.py 
+
 
 # Data type class
 # contains name and value

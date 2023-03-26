@@ -1,3 +1,10 @@
+#
+#Read Readme first if cannot run the code
+#
+#
+#Order to read files
+#main.py -> mainMeny.py -> Calender.py -> Day.py -> dayArray.py -> dataClass.py 
+
 import tkinter as tk
 from tkinter import ttk
 from Calender import Calender
