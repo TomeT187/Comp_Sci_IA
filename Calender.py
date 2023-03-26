@@ -5,8 +5,8 @@ from math import floor
 
 
 
-
-
+#Creates a Window that Shows the User all of the days in a month
+# The User can click on a day to open that day's information
 class Calender(tk.Tk,):
 
     def __init__(self,nameofthemonth):
@@ -25,10 +25,8 @@ class Calender(tk.Tk,):
 
         file_menu = tk.Menu(menuBar)
 
-        # add a menu item to the menu
         file_menu.add_command(label='Month Select',command=self.mainMenuOpen)
 
-        # add the File menu to the menubar
         menuBar.add_cascade(label="Months",menu=file_menu)
 
     def mainMenuOpen(self):

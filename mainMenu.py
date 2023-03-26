@@ -1,8 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
-
 from Calender import Calender
 
+
+#First Screen User is shown, creates a drop down menu for the user to select a month
 class mainMenu(tk.Tk):
 
     def __init__(self):
@@ -14,6 +15,8 @@ class mainMenu(tk.Tk):
         self.screenMaker(400,100)
         self.createDropDown()
 
+    # Function used in initiation of a window
+    # Uses functions to set specific aspects of the window
     def screenMaker(self,window_width, window_height):
         # get the screen dimension
         screen_width = self.winfo_screenwidth()
@@ -29,16 +32,11 @@ class mainMenu(tk.Tk):
         self.iconbitmap('Images\\weight.ico')
 
 
-    #function the placesa drop down menu with options of each month in monthlist
-    
+    #function the places a drop down menu with options of each month in monthlist
     def createDropDown(self):
-        # padding for widgets using the grid layout
         paddings = {'padx': 5, 'pady': 5}
-
-        # label
         label = ttk.Label(self,  text='Select the Month:')
         label.grid(column=0, row=0, sticky=tk.W, **paddings)
-
         def optionSelected(a):
             self.destroy() 
             for i in range(len(self.monthlist)):
@@ -46,7 +44,6 @@ class mainMenu(tk.Tk):
                     thisMonth = Calender(i+1)
                     thisMonth.mainloop()
                     
-        # option menu
         option_menu = ttk.OptionMenu(self,self.option_var,self.monthlist[0],*self.monthlist,command = optionSelected,)
         option_menu.grid(column=1, row=0, sticky=tk.W, )
 

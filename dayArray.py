@@ -3,6 +3,9 @@ from dataClass import dataClass
 #only use to sort dataClass objects into the day by arrays
 # and to read/write to files
 
+#reads a file specific to a day
+# retrieves information for data types and places creates a dataClass class which is places into a list 
+#Contains functions to add, edit and delete data
 class dayArray():
     def __init__(self,dayNumberIn, monthNumberIn):
         self.dayNumber = dayNumberIn
@@ -51,6 +54,15 @@ class dayArray():
             if i.name == nameIn:
                 i.value =newValue
 
+    def removeType(self,nameIn):
+        
+        for i in self.dataClassList:
+            #print(i)
+            if i == nameIn:
+                self.dataClassList.remove(i)
+
+
+    #for testing
     def test(self,a):
         print(a)
 

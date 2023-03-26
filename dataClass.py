@@ -1,6 +1,8 @@
 
-from tkinter import ttk
-
+# Data type class
+# contains name and value
+# has a function to change the function 
+# has a function to return the name and value in a format to be written to a file
 class dataClass():
     def __init__(self, nameIn,valueIn):
         self.name = nameIn
@@ -12,4 +14,3 @@ class dataClass():
     def changeValue(self,a):
         self.value = a
 
-#add ttk variable to this class so one is made 

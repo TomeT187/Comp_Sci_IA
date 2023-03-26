@@ -3,6 +3,9 @@ from tkinter import ttk
 from dayArray import dayArray
 from tkinter import StringVar
 
+
+#Displays data from each day
+#Allows the User to enter new data types, edit old data types, and delete old data types
 class Day(tk.Tk):
     def __init__(self,NumberDayIn,monthNumberIn):
         super().__init__()
@@ -10,18 +13,42 @@ class Day(tk.Tk):
         self.objectArray = []
         self.Numberday = NumberDayIn
         self.monthNumber = monthNumberIn
-        self.screenmaker(500,500)
+        self.screenmaker(700,700)
         self.columnconfigure(0, weight=4)
         self.columnconfigure(1, weight=1)
         self.columnconfigure(2, weight=4)
         self.columnconfigure(3, weight=3)
         self.todayArray = dayArray(NumberDayIn,monthNumberIn)
 
+
+       
+
         backButton = ttk.Button(self, text="Back to Calendar",command=lambda: self.openCalendar())
         backButton.grid(column=0,row=0,padx=5, pady=5,sticky=tk.W )#
         
-        addButton = ttk.Button(self, text="Add Type",command=lambda: print("hi"))
-        addButton.grid(column=3,row=0,sticky=tk.E,padx=5, pady=5)
+
+
+        newTypeLabel = ttk.Label(self, text="New Type")
+        newTypeLabel.grid(column=5,row=0,sticky=tk.W,padx=5, pady=1)
+
+        addButton = ttk.Button(self, text="Add Type",command=lambda: self.AddType())
+        addButton.grid(column=5,row=1,sticky=tk.W,padx=5, pady=1)
+
+        newTypeEntryLabel = ttk.Label(self,text="Enter Name" )
+        newTypeEntryLabel.grid(column=5,row=2,sticky=tk.W,padx=5, pady=1)
+
+        self.newTypeInVar = StringVar()
+        newTypeEntry = ttk.Entry(self,textvariable=self.newTypeInVar)
+        newTypeEntry.grid(column=5,row=3,sticky=tk.W,padx=5, pady=1)
+
+        newAmountLabel = ttk.Label(self,text="Enter Ammount")
+        newAmountLabel.grid(column=5,row=4,sticky=tk.W,padx=5, pady=1)
+
+        self.newAmountVar = StringVar()
+        newAmountEntry = ttk.Entry(self,textvariable=self.newAmountVar)
+        newAmountEntry.grid(column=5,row=5,sticky=tk.W,padx=5, pady=1)
+        
+        
 
         headerTypeLabel = ttk.Label(self,text="Type",)    
         headerTypeLabel.grid(column=0,row=1,sticky=tk.W,padx=5, pady=5)    
@@ -29,17 +56,29 @@ class Day(tk.Tk):
         headerAmountLabel = ttk.Label(self,text="Amount",)
         headerAmountLabel.grid(column=1,row=1,padx=5, pady=5,sticky=tk.W,)
 
+        enterBoxLabel = ttk.Label(self,text="Enter New Amount")
+        enterBoxLabel.grid(column=2,row=1,padx=5, pady=5,sticky=tk.E)
+
         headerEntryLabel = ttk.Label(self,text="Set Amount")
-        headerEntryLabel.grid(column=2,row=1,padx=5, pady=5,sticky=tk.E)
+        headerEntryLabel.grid(column=3,row=1,padx=5, pady=5,sticky=tk.E)
 
         
 
-        for i in range(len(self.todayArray.dataClassList)):
-            self.objectPlacer(self.todayArray,i)
+        for self.i in range(len(self.todayArray.dataClassList)):
+            self.objectPlacer(self.todayArray,self.i)
             
 
         
+    def AddType(self):
+        self.todayArray.addDataType(self.newTypeInVar.get(),self.newAmountVar.get())
+        self.todayArray.writeInfo()
+        self.destroyObjects()
+        for i in range(len(self.todayArray.dataClassList)):
+            self.objectPlacer(self.todayArray,i)
+
         
+
+
             
     def objectPlacer(self,dataClassIN,rowNum):
         
@@ -50,7 +89,8 @@ class Day(tk.Tk):
         amountLabel = ttk.Label(self, text=dataClassIN.dataClassList[rowNum].value)
         dataStringVar = StringVar()
         amountEntry = ttk.Entry(self,textvariable=dataStringVar)
-        addButton = ttk.Button(self, text="Add", command= lambda: self.buttonPressed(dataClassIN,amountEntry,rowNum) )
+        addButton = ttk.Button(self, text="Set", command= lambda: self.buttonPressed(dataClassIN,amountEntry,rowNum) )
+        deleteButton = ttk.Button(self,text="X", command= lambda: self.deleteButtonPressed(dataClassIN,rowNum))
         #addButton = ttk.Button(self, text="Add", command= lambda: dataClassIN.changeValue(amountEntry.get()))
         
         
@@ -58,8 +98,9 @@ class Day(tk.Tk):
         amountLabel.grid(column=1,row=rowNum + 2,padx=5, pady=5,sticky=tk.W,)
         amountEntry.grid(column=2,row=rowNum + 2,padx=5, pady=5,sticky=tk.E)
         addButton.grid(column=3,row=rowNum + 2,padx=5, pady=5,sticky=tk.E)
+        deleteButton.grid(column=4,row=rowNum + 2, padx=5, pady=5,sticky=tk.E)
 
-        self.objectArray.append([label,amountLabel,amountEntry,addButton])
+        self.objectArray.append([label,amountLabel,amountEntry,addButton,deleteButton])
 
     def destroyObjects(self):
         for i in self.objectArray:
@@ -73,6 +114,19 @@ class Day(tk.Tk):
         for i in range(len(self.todayArray.dataClassList)):
             self.objectPlacer(self.todayArray,i)
 
+
+############################
+
+
+    def deleteButtonPressed(self,dataClassIN,i):
+        dataClassIN.removeType(dataClassIN.dataClassList[i])
+        #print(dataClassIN.dataClassList[i])
+        dataClassIN.writeInfo()
+        self.destroyObjects()
+        for i in range(len(self.todayArray.dataClassList)):
+            self.objectPlacer(self.todayArray,i)
+
+############################
         
     def openCalendar(self):
         from Calender import Calender
@@ -90,7 +144,7 @@ class Day(tk.Tk):
         # set the position of the window to the center of the screen
         self.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
         self.title(self.monthlist[self.monthNumber -1 ] + " " + str(self.Numberday) + " Info")
-        self.resizable(0, 0)
+        self.resizable(1, 1)
         self.columnconfigure(0, weight=0)
         self.iconbitmap('Images\\table.ico')
 
