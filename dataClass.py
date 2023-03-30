@@ -18,6 +18,6 @@ class dataClass():
     def stringgGetter(self):
         return(str(self.name) + "," + str(self.value) )
 
-    def changeValue(self,a):
-        self.value = a
+    def changeValue(self,newValue):
+        self.value = newValue
 

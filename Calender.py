@@ -32,11 +32,11 @@ class Calender(tk.Tk,):
 
         file_menu = tk.Menu(menuBar)
 
-        file_menu.add_command(label='Month Select',command=self.mainMenuOpen)
+        file_menu.add_command(label='Month Select',command=self.openMainMenu)
 
         menuBar.add_cascade(label="Months",menu=file_menu)
 
-    def mainMenuOpen(self):
+    def openMainMenu(self):
         self.destroy()
         from mainMenu import mainMenu
         MainMenu = mainMenu()

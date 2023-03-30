@@ -36,24 +36,24 @@ class Day(tk.Tk):
 
 
         newTypeLabel = ttk.Label(self, text="New Type")
-        newTypeLabel.grid(column=5,row=0,sticky=tk.W,padx=5, pady=1)
+        newTypeLabel.grid(column=5,row=0,sticky=tk.W,padx=5, pady=5)
 
         addButton = ttk.Button(self, text="Add Type",command=lambda: self.AddType())
-        addButton.grid(column=5,row=1,sticky=tk.W,padx=5, pady=1)
+        addButton.grid(column=5,row=1,sticky=tk.W,padx=5, pady=5)
 
         newTypeEntryLabel = ttk.Label(self,text="Enter Name" )
-        newTypeEntryLabel.grid(column=5,row=2,sticky=tk.W,padx=5, pady=1)
+        newTypeEntryLabel.grid(column=5,row=2,sticky=tk.W,padx=5, pady=5)
 
         self.newTypeInVar = StringVar()
         newTypeEntry = ttk.Entry(self,textvariable=self.newTypeInVar)
-        newTypeEntry.grid(column=5,row=3,sticky=tk.W,padx=5, pady=1)
+        newTypeEntry.grid(column=5,row=3,sticky=tk.W,padx=5, pady=5)
 
-        newAmountLabel = ttk.Label(self,text="Enter Ammount")
-        newAmountLabel.grid(column=5,row=4,sticky=tk.W,padx=5, pady=1)
+        newAmountLabel = ttk.Label(self,text="Enter Amount")
+        newAmountLabel.grid(column=5,row=4,sticky=tk.W,padx=5, pady=5)
 
         self.newAmountVar = StringVar()
         newAmountEntry = ttk.Entry(self,textvariable=self.newAmountVar)
-        newAmountEntry.grid(column=5,row=5,sticky=tk.W,padx=5, pady=1)
+        newAmountEntry.grid(column=5,row=5,sticky=tk.W,padx=5, pady=5)
         
         
 
@@ -95,8 +95,8 @@ class Day(tk.Tk):
         
         #for i in todayArray.dataClassList:
 
-        label = ttk.Label(self, text=dataClassIN.dataClassList[rowNum].name)
-        amountLabel = ttk.Label(self, text=dataClassIN.dataClassList[rowNum].value)
+        label = ttk.Label(self, text=dataClassIN.dataClassList[rowNum].name,font="Helvetica 12 bold")
+        amountLabel = ttk.Label(self, text=dataClassIN.dataClassList[rowNum].value,font="Helvetica 12 bold")
         dataStringVar = StringVar()
         amountEntry = ttk.Entry(self,textvariable=dataStringVar)
         addButton = ttk.Button(self, text="Set", command= lambda: self.buttonPressed(dataClassIN,amountEntry,rowNum) )

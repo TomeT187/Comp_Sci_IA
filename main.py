@@ -1,5 +1,5 @@
 #
-#Read Readme first if cannot run the code
+#Read the Readme first if cannot run the code
 #
 #This is the first file in order
 #
