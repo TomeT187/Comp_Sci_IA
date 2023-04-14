@@ -9,6 +9,7 @@ import tkinter as tk
 from tkinter import ttk
 from dayArray import dayArray
 from tkinter import StringVar
+from Presets import presets
 
 
 #Displays data from each day
@@ -18,14 +19,16 @@ class Day(tk.Tk):
         super().__init__()
         self.monthlist = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October","Novemeber", "December"]
         self.objectArray = []
+        self.presetObjectArray = []
         self.Numberday = NumberDayIn
         self.monthNumber = monthNumberIn
-        self.screenmaker(700,700)
+        self.screenmaker(1000,700)
         self.columnconfigure(0, weight=4)
         self.columnconfigure(1, weight=1)
         self.columnconfigure(2, weight=4)
         self.columnconfigure(3, weight=3)
         self.todayArray = dayArray(NumberDayIn,monthNumberIn)
+        self.presets = presets()
 
 
        
@@ -33,29 +36,49 @@ class Day(tk.Tk):
         backButton = ttk.Button(self, text="Back to Calendar",command=lambda: self.openCalendar())
         backButton.grid(column=0,row=0,padx=5, pady=5,sticky=tk.W )#
         
-
+        
 
         newTypeLabel = ttk.Label(self, text="New Type")
-        newTypeLabel.grid(column=5,row=0,sticky=tk.W,padx=5, pady=5)
+        newTypeLabel.grid(column=5,row=0,sticky=tk.W,padx=20, pady=5)
 
         addButton = ttk.Button(self, text="Add Type",command=lambda: self.AddType())
-        addButton.grid(column=5,row=1,sticky=tk.W,padx=5, pady=5)
+        addButton.grid(column=5,row=1,sticky=tk.W,padx=20, pady=5)
 
         newTypeEntryLabel = ttk.Label(self,text="Enter Name" )
-        newTypeEntryLabel.grid(column=5,row=2,sticky=tk.W,padx=5, pady=5)
+        newTypeEntryLabel.grid(column=5,row=2,sticky=tk.W,padx=20, pady=5)
 
         self.newTypeInVar = StringVar()
         newTypeEntry = ttk.Entry(self,textvariable=self.newTypeInVar)
-        newTypeEntry.grid(column=5,row=3,sticky=tk.W,padx=5, pady=5)
+        newTypeEntry.grid(column=5,row=3,sticky=tk.W,padx=20, pady=5)
 
         newAmountLabel = ttk.Label(self,text="Enter Amount")
-        newAmountLabel.grid(column=5,row=4,sticky=tk.W,padx=5, pady=5)
+        newAmountLabel.grid(column=5,row=4,sticky=tk.W,padx=20, pady=5)
 
         self.newAmountVar = StringVar()
         newAmountEntry = ttk.Entry(self,textvariable=self.newAmountVar)
-        newAmountEntry.grid(column=5,row=5,sticky=tk.W,padx=5, pady=5)
+        newAmountEntry.grid(column=5,row=5,sticky=tk.W,padx=20, pady=5)
+
+
+
+
+        addPresetLabel = ttk.Label(self,text="Add Preset")
+        addPresetLabel.grid(column=6,row=0,padx=20, pady=5,sticky=tk.W)
+
+        addPresetButton = ttk.Button(self,command=lambda: self.newPresetButtonPressed() ,text="Create Preset")
+        addPresetButton.grid(column=6,row=1,padx=20, pady=5,sticky=tk.W)
+
+        newPresetEntryLabel = ttk.Label(self,text="Enter New Type")
+        newPresetEntryLabel.grid(column=6,row=2,sticky=tk.W,padx=20, pady=5)
+
+        self.newPresetVar = StringVar()
+        newPresetEntry = ttk.Entry(self,textvariable=self.newPresetVar)
+        newPresetEntry.grid(column=6,row=3,padx=20, pady=5,sticky=tk.W)
+
+        for self.j in range(len(self.presets.presetArray)):
+            self.addPresets(self.j)
         
-        
+    
+
 
         headerTypeLabel = ttk.Label(self,text="Type",)    
         headerTypeLabel.grid(column=0,row=1,sticky=tk.W,padx=5, pady=5)    
@@ -86,8 +109,28 @@ class Day(tk.Tk):
         for i in range(len(self.todayArray.dataClassList)):
             self.objectPlacer(self.todayArray,i)
 
-        
 
+    def addPresets(self,rowNum):
+        newPresetButton = ttk.Button(self,command= lambda: self.addPresetButtonPressed(self.presets.presetArray[rowNum]), text= self.presets.presetArray[self.j])
+        newPresetButton.grid(column=6,row= 4 + rowNum ,padx=20, pady=5,sticky=tk.W)
+        self.presetObjectArray.append(newPresetButton)
+
+
+    def addPresetButtonPressed(self,nameIn):
+        print(nameIn)
+        self.todayArray.addDataType(nameIn,"")
+        self.todayArray.writeInfo()
+        self.destroyObjects()
+        for i in range(len(self.todayArray.dataClassList)):
+            self.objectPlacer(self.todayArray,i)
+
+
+    def newPresetButtonPressed(self):
+        self.presets.addPreset(self.newPresetVar.get())
+        for i in self.presetObjectArray:
+            i.destroy()
+        for self.j in range(len(self.presets.presetArray)):
+            self.addPresets(self.j)
 
             
     def objectPlacer(self,dataClassIN,rowNum):
