@@ -72,30 +72,8 @@ class dayArray():
     #for testing
     def test(self,a):
         print(a)
+      
 
 
-            
-
-
-
-
-            
-            
-
-
-# test = dayArray(12,12)
-# test.getInfo()
-# test.changeDataValue("abc", "0")
-# #test.addDataType("abc", "999888999")
-# test.writeInfo()
-
-
-# #print(len(test.dataClassList))
-# # print("nothing")
-# # test.addDataType("abcd",2)
-# # print("added to list")
-# # test.writeInfo()
-# # print("written to file")
-# # test.getInfo()
 
 

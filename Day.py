@@ -74,6 +74,7 @@ class Day(tk.Tk):
         newPresetEntry = ttk.Entry(self,textvariable=self.newPresetVar)
         newPresetEntry.grid(column=6,row=3,padx=20, pady=5,sticky=tk.W)
 
+        #Retrieves presets from the preset objects and places them in the GUI
         for self.j in range(len(self.presets.presetArray)):
             self.addPresets(self.j)
         
@@ -96,7 +97,7 @@ class Day(tk.Tk):
         removeLabel.grid(column=4,row=1,padx=5, pady=5,sticky=tk.E)
 
         
-
+        #Loops through each object in the dataClassList and places them on the GUI
         for self.i in range(len(self.todayArray.dataClassList)):
             self.objectPlacer(self.todayArray,self.i)
             
@@ -200,7 +201,4 @@ class Day(tk.Tk):
         self.resizable(1, 1)
         self.columnconfigure(0, weight=0)
         self.iconbitmap('Images\\table.ico')
-
-# test = Day(12,12)
-# test.mainloop()
 

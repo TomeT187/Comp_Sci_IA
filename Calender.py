@@ -86,6 +86,8 @@ class Calender(tk.Tk,):
             # If not place it one forward
             else:
                 self.columnnumber += 1
+
+                
         #Function that combines the button placer and spacing checker, takes in the number of the day
         def ButtonPlacer(ii):
             dayButtonMaker(ii)

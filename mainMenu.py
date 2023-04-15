@@ -19,7 +19,7 @@ class mainMenu(tk.Tk):
         self.option_var = tk.StringVar(self)
 
 
-        self.screenMaker(400,100)
+        self.screenMaker(400,350)
         self.createDropDown()
 
     # Function used in initiation of a window
